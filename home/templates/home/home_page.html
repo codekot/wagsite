@@ -1,12 +1,11 @@
-<!-- {% extends "base.html" %}
+{% extends "base.html" %}
 
 {% load wagtailcore_tags %}
 
 {% block content %}
-	{{ page.body|richtext }}
+    {{ page.body|richtext }}
+    {% for post in page.get_children %}
+        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+    {% endfor %}
 
-	{% for item in page.get_children %}
-		<h2><a href="{% pageurl news %}">{{ item.title }}</a></h2>
-	{% endfor %}
-
-{% endblock %} -->
+{% endblock %}

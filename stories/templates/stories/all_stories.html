@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+	{{ page.body|richtext }}
+
+	{% for story in page.get_children %}
+		<h2><a href="{% pageurl story %}">{{ story.title }}</a></h2>
+	{% endfor %}
+
+{% endblock %}
