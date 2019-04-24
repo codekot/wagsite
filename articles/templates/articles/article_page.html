@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
+	
+	{% image self.content_image original as content_img %}
 
-	{{ page.body|richtext }}
+	<h3>{{ page.author }}</h3>
+
+	<p>{{ page.body|richtext }}</p>
+	<img src="{{ content_img.url }}">
+
+	{% for tag in page.tags.all %}
+		<p>{{ tag }}</p>
+	{% endfor %}
 
 {% endblock %}
