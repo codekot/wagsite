@@ -2,7 +2,5 @@
 *~
 __pycache__
 db.sqlite3
-Dockerfile
-**/migrations
 **/__pycache__
 
