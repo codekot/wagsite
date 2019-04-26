@@ -42,10 +42,11 @@ INSTALLED_APPS = [
     'wagtail.admin',
     'wagtail.core',
     'wagtail.api.v2',
-    'rest_framework',
-   
+    'rest_framework'
+
     'modelcluster',
     'taggit',
+    'corsheaders',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -66,7 +67,12 @@ MIDDLEWARE = [
 
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'demo_site.urls'
 
