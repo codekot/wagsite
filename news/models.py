@@ -5,6 +5,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.api import APIField
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.core.templatetags import wagtailcore_tags
 
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -34,6 +35,9 @@ class NewsPage(Page):
         )
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 
+    def rendered_body(self):
+        return wagtailcore_tags.richtext(self.body)
+
     content_panels = Page.content_panels + [
         FieldPanel('author'),
         FieldPanel('body', classname='full'),
@@ -43,7 +47,7 @@ class NewsPage(Page):
 
     api_fields = [
         APIField('author'),
-        APIField('body'),
+        APIField('rendered_body'),
         APIField('content_image'),
         APIField('tags')
     ]
