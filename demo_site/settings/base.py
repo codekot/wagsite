@@ -162,7 +162,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '35.236.156.50:8000/media/'
+MEDIA_URL = 'http://35.236.156.50:8000/media/'
 
 
 # Wagtail settings
