@@ -10,6 +10,7 @@ from wagtail.core.templatetags import wagtailcore_tags
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
+from demo_site.settings.base import BASE_DIR
 
 
 # Create your models here.
@@ -37,7 +38,10 @@ class ArticlePage(Page):
     tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
 
     def rendered_body(self):
-        return wagtailcore_tags.richtext(self.body)
+        body = wagtailcore_tags.richtext(self.body)
+        from wagtail.core.models import Site
+        body = body.replace('"/documents/', f'{Site.objects.first().root_url}/documents/')
+        return body
 
     content_panels = Page.content_panels + [
         FieldPanel('author'),

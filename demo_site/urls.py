@@ -41,4 +41,5 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static('/media/images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
-    urlpatterns += static('/media/documents/', document_root=os.path.join(settings.MEDIA_ROOT, 'documents'))
+    urlpatterns += static('/media/documents/', document_root=os.path.join(settings.BASE_DIR, 'documents'))
+    urlpatterns += static('/documents/', document_root=os.path.join(settings.BASE_DIR, 'media/documents'))
