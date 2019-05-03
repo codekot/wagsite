@@ -11,9 +11,6 @@ ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-MEDIA_URL = 'http://127.0.0.1:8000/media/'
-
-
 try:
     from .local import *
 except ImportError:
