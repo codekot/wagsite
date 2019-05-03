@@ -35,10 +35,7 @@ class StoryPage(Page):
     tags = ClusterTaggableManager(through=StoryPageTag, blank=True)
 
     def rendered_body(self):
-        body = wagtailcore_tags.richtext(self.body)
-        from wagtail.core.models import Site
-        body = body.replace('"/documents/', f'{Site.objects.first().root_url}/documents/')
-        return body
+        return wagtailcore_tags.richtext(self.body)
 
     content_panels = Page.content_panels + [
         FieldPanel('author'),
