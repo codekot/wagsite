@@ -11,6 +11,7 @@ ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+BASE_URL = 'http://35.236.156.50:8080'
 
 try:
     from .local import *
