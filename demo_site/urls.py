@@ -10,6 +10,10 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 
 from .api import api_router
+from .wagtail_hooks import init_wagtail_hooks
+
+init_wagtail_hooks()
+
 
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
@@ -41,5 +45,3 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static('/media/images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
-    urlpatterns += static('/media/documents/', document_root=os.path.join(settings.BASE_DIR, 'documents'))
-    urlpatterns += static('/documents/', document_root=os.path.join(settings.BASE_DIR, 'media/documents'))
