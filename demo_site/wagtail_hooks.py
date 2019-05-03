@@ -14,7 +14,7 @@ def document_link_handler(attrs):
     except (Document.DoesNotExist, KeyError):
         return "<a>"
     base_url = Site.objects.first().root_url
-    return f'<a href="{base_url}{report.url}">'
+    return '<a href="{}{}">'.format(base_url, report.url)
 
 
 def image_link_handler(attrs):
@@ -31,7 +31,7 @@ def image_link_handler(attrs):
     # form extra src attribute
     base_url = Site.objects.first().root_url
     rendition = get_rendition_or_not_found(image, image_format.filter_spec)
-    extra_attributes = {'src': f'{base_url}{rendition.url}'}
+    extra_attributes = {'src': '{}{}'.format(base_url, rendition.url)}
 
     # From default implementation, except extra src attribute
     return image_format.image_to_html(image, attrs.get('alt', ''), extra_attributes)
