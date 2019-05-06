@@ -25,6 +25,7 @@ class AllArticles(Page):
 
 class ArticlePage(Page):
     author = models.CharField(max_length=255, blank=True)
+    description = models.CharField(max_length=255, blank=True)
     body = RichTextField(blank=True)
     content_image = models.ForeignKey(
             "wagtailimages.Image",
@@ -43,6 +44,7 @@ class ArticlePage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('author'),
+        FieldPanel('description'),
         FieldPanel('body', classname='full'),
         ImageChooserPanel("content_image"),
         FieldPanel('tags')
@@ -50,6 +52,7 @@ class ArticlePage(Page):
 
     api_fields = [
         APIField('author'),
+        APIField('description'),
         APIField('rendered_body'),
         APIField('content_image_url'),
         APIField('tags')
