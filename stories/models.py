@@ -36,7 +36,6 @@ class AllStories(Page):
     ]
 
 class StoryPage(Page):
-    author = models.CharField(max_length=255, blank=True)
     description = models.CharField(max_length=255, blank=True)
     body = RichTextField(blank=True)
     content_image = models.ForeignKey(
@@ -47,6 +46,13 @@ class StoryPage(Page):
         related_name="+"
         )
     tags = ClusterTaggableManager(through=StoryPageTag, blank=True)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        editable=True,
+        on_delete=models.SET_NULL,
+        )
 
     @property
     def owner_page(self):
@@ -62,16 +68,15 @@ class StoryPage(Page):
             return None
 
     content_panels = Page.content_panels + [
-        FieldPanel('author'),
         FieldPanel('description'),
         FieldPanel('body', classname='full'),
         ImageChooserPanel("content_image"),
-        FieldPanel('tags')
+        FieldPanel('tags'),
+        FieldPanel('author'),
 
     ]
 
     api_fields = [
-        APIField('author'),
         APIField('description'),
         APIField('rendered_body'),
         APIField('content_image_url'),
