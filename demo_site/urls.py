@@ -43,5 +43,6 @@ if settings.DEBUG:
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static('{}{}'.format(settings.BASE_URL, settings.MEDIA_URL), document_root=settings.MEDIA_ROOT)
-    urlpatterns += static('/media/images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
-    urlpatterns += static('/media/original_images/', document_root=os.path.join(settings.MEDIA_ROOT, 'original_images'))
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # urlpatterns += static('/media/images/', document_root=os.path.join(settings.MEDIA_ROOT, 'images'))
+    # urlpatterns += static('/media/original_images/', document_root=os.path.join(settings.MEDIA_ROOT, 'original_images'))

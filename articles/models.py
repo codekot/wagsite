@@ -55,7 +55,8 @@ class ArticlePage(Page):
         APIField('description'),
         APIField('rendered_body'),
         APIField('content_image_url'),
-        APIField('tags')
+        APIField('tags'),
+        APIField('owner')
     ]
 
 class TestPage(Page):
