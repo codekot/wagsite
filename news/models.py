@@ -15,14 +15,18 @@ from rest_framework.fields import Field
 
 # Create your models here.
 
-class OwnerSerializedField(Field):
+class AuthorSerializedField(Field):
 
     def to_representation(self, value):
+        try:
+            avatar_url = "{}{}".format(settings.BASE_URL, value.wagtail_userprofile.avatar.url)
+        except:
+            avatar_url = None
         return {
             "id": value.id,
             "first_name": value.first_name,
             "last_name": value.last_name,
-            "avatar": "{}{}".format(settings.BASE_URL, value.wagtail_userprofile.avatar.url),
+            "avatar": avatar_url,
         }
 
 class NewsPageTag(TaggedItemBase):
@@ -54,10 +58,6 @@ class NewsPage(Page):
         on_delete=models.SET_NULL,
         )
 
-    @property
-    def owner_page(self):
-        return self.owner
-
     def rendered_body(self):
         return wagtailcore_tags.richtext(self.body)
 
@@ -80,5 +80,5 @@ class NewsPage(Page):
         APIField('rendered_body'),
         APIField('content_image_url'),
         APIField('tags'),
-        APIField('owner_page', serializer=OwnerSerializedField()),
+        APIField('author', serializer=AuthorSerializedField()),
     ]
