@@ -25,20 +25,6 @@ class AuthorSerializedField(Field):
 
     def to_representation(self, value):
         try:
-            avatar_url = "{}{}".format(settings.BASE_URL, value.wagtail_userprofile.avatar.url)
-        except:
-            avatar_url = None
-        return {
-            "id": value.id,
-            "first_name": value.first_name,
-            "last_name": value.last_name,
-            "avatar": avatar_url,
-        }
-
-class WriterSerializedField(Field):
-
-    def to_representation(self, value):
-        try:
             avatar_url = "{}{}{}".format(settings.BASE_URL, settings.IMAGES_URL, value.image)
         except:
             avatar_url = None
@@ -72,13 +58,6 @@ class ArticlePage(Page):
         )
     tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        null=True,
-        blank=True,
-        editable=True,
-        on_delete=models.SET_NULL,
-        )
-    writer = models.ForeignKey(
         People,
         null=True,
         blank=True,
@@ -102,7 +81,6 @@ class ArticlePage(Page):
         ImageChooserPanel("content_image"),
         FieldPanel('tags'),
         FieldPanel('author'),
-        FieldPanel('writer'),
     ]
 
     api_fields = [
@@ -111,5 +89,7 @@ class ArticlePage(Page):
         APIField('content_image_url'),
         APIField('tags'),
         APIField('author', serializer=AuthorSerializedField()),
-        APIField('writer', serializer=WriterSerializedField()),
     ]
+
+class TestPage(Page):
+    pass
