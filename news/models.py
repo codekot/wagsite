@@ -12,6 +12,8 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 
 from rest_framework.fields import Field
 
+from home.models import People
+
 
 # Create your models here.
 
@@ -19,13 +21,14 @@ class AuthorSerializedField(Field):
 
     def to_representation(self, value):
         try:
-            avatar_url = "{}{}".format(settings.BASE_URL, value.wagtail_userprofile.avatar.url)
+            avatar_url = "{}{}{}".format(settings.BASE_URL, settings.IMAGES_URL, value.image)
         except:
             avatar_url = None
         return {
             "id": value.id,
             "first_name": value.first_name,
             "last_name": value.last_name,
+            "job_title": value.job_title,
             "avatar": avatar_url,
         }
 
@@ -51,7 +54,7 @@ class NewsPage(Page):
         )
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        People,
         null=True,
         blank=True,
         editable=True,
