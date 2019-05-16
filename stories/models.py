@@ -21,7 +21,7 @@ class AuthorSerializedField(Field):
 
     def to_representation(self, value):
         try:
-            avatar_url = "{}{}{}".format(settings.BASE_URL, settings.IMAGES_URL, value.image)
+            avatar_url = "{}{}".format(settings.BASE_URL, value.image.file.url)
         except:
             avatar_url = None
         return {
