@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ```
 And run project
 ```bash
-python manage.py runserver 0.0.0.0:8080
+python manage.py runserver 0.0.0.0:8000
 ```
 
 #### Production build
