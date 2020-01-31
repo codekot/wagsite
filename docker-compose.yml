@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+
+### App Container ######################################
+
+    api:
+        container_name: api
+        build:
+            context: ./docker/api
+            dockerfile: Dockerfile
+        volumes:
+            - .:/usr/src/app
+        ports:
+            - "8080:8080"
+        restart: always
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "1m"
+                max-file: "3"
