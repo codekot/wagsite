@@ -1,7 +1,7 @@
 from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'tec5z#b$p_em4nuf(f4p3rw!!@z=nw1!1iicq%uta-%&w72f&a'
@@ -10,8 +10,6 @@ SECRET_KEY = 'tec5z#b$p_em4nuf(f4p3rw!!@z=nw1!1iicq%uta-%&w72f&a'
 ALLOWED_HOSTS = ['*'] 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-BASE_URL = 'http://35.236.156.50:8000'
 
 try:
     from .local import *
