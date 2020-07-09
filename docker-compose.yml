@@ -5,7 +5,7 @@ services:
 ### App Container ######################################
 
     api:
-        container_name: api
+        container_name: wagtail_angular_api
         build:
             context: ./docker/api
             dockerfile: Dockerfile
