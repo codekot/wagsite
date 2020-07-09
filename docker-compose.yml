@@ -12,7 +12,7 @@ services:
         volumes:
             - .:/usr/src/app
         ports:
-            - "8000:8000"
+            - "8083:8000"
         restart: always
         logging:
             driver: "json-file"
